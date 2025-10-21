@@ -26,3 +26,11 @@ code {
   width: 100%;
 
 }
+
+.card{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

@@ -9,16 +9,17 @@ function App() {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://talentquotez.app.n8n.cloud/webhook/687b4a36-f018-41b3-afe3-16c7b6d5bd03"
+        "https://appluis.app.n8n.cloud/webhook/94de3f6f-f053-4214-b996-542a6141ff4c"
       );
 
-      if (!response.ok) throw new Error("Error al obtener productos");
+      if (!response.ok) throw new Error("Error al obtener usuarios");
 
       const data = await response.json();
-      setProductos(data);
+      const dataArr = [data];
+      setProductos(dataArr);
     } catch (error) {
       console.error(error);
-      alert("Hubo un error al obtener los productos");
+      alert("Hubo un error al obtener los usuarios");
     } finally {
       setLoading(false);
     }
@@ -28,21 +29,19 @@ function App() {
     <div className="App">
       <h1>Prueba Talent Quote</h1>
       <button onClick={obtenerProductos} className="btn">
-        {loading ? "Cargando..." : "Obtener productos"}
+        {loading ? "Cargando..." : "Obtener usuarios"}
       </button>
-
       <div className="containeraa">
-        {productos.length > 0 ? (
-          productos.map((prod, index) => (
-            <div key={index} className="card">
-              <h3>{prod.title || prod.name || `Producto ${index + 1}`}</h3>
-              <p>{prod.description || "Sin descripción"}</p>
-              {prod.price && <p>💲{prod.price}</p>}
-            </div>
-          ))
-        ) : (
-          !loading && <p>No hay productos aún</p>
-        )}
+        {productos.length > 0
+          ? productos.map((prod, index) => (
+              <div key={index} className="card">
+                <span>id: {prod.id}</span>
+                <span>nombre: {prod.name}</span>
+                <span>email: {prod.email}</span>
+                <span>estado: {prod.state}</span>
+              </div>
+            ))
+          : !loading && <p>No hay usuarios aún</p>}
       </div>
     </div>
   );
